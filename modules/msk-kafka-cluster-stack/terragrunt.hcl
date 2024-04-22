@@ -1,5 +1,5 @@
 terraform {
-  source = "./terraform-aws-msk-kafka-cluster"s"
+  source = "./terraform-aws-msk-kafka-cluster"
 }
 
 inputs = {

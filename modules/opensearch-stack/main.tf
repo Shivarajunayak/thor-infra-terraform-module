@@ -1,5 +1,5 @@
 module "lambda_functions" {
-  source = "./terraform-aws-lambda"
+  source = "./terraform-aws-opensearch"
 
 resource "aws_opensearch_domain" "example" {
   domain_name           = var.domain_name

@@ -2,15 +2,29 @@ terraform {
   source = "./terraform-aws-athena"
 }
 
-# Include common settings from the root terragrunt.hcl file
-include {
-  path = find_in_parent_folders()
-}
-
 inputs = {
-  # Define input variables for the Athena module
-  # For example:
-  region          = "us-west-2"
-  s3_output_bucket = "example-output-bucket"
+  create_s3_bucket = true
+  athena_s3_bucket_id = var.create_s3_bucket
+
+  databases = {
+    database_name = var.databases
+  }
+
+  athena_workgroup_description = var.workgroup_description
 }
 
+terraform {
+  source = "./terraform-aws-athena"
+}
+
+dependency "s3_bucket" {
+  config_path = "../athena_output_bucket"
+}
+
+dependency "athena_database" {
+  config_path = "../example_database"
+}
+
+dependency "athena_workgroup" {
+  config_path = "../example_workgroup"
+}
